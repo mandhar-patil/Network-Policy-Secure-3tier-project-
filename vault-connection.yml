@@ -1,0 +1,15 @@
+apiVersion: external-secrets.io/v1
+kind: SecretStore
+metadata:
+ name: vault-backend
+ namespace: three-tier
+spec:
+ provider:
+  vault:
+   server: "http://vault.vault.svc.cluster.local:8200" # Vault Service DNS
+   path: "secret" # KV engine mount name
+   version: "v2" # KV version 2
+   auth:
+    tokenSecretRef:
+     name: vault-token # K8s secret we created in Step 4
+     key: token

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: three-tier
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: mandhar12/infromatrix-backend:v1   # replace this
+          ports:
+            - containerPort: 3500
+          env:
+            - name: MONGO_CONN_STR
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: MONGO_CONN_STR
+            - name: PORT
+              value: "3500"

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-specific-traffic
+  namespace: three-tier
+spec:
+  podSelector:          # ← Protect THIS pod
+    matchLabels:
+      app: mongodb      # ← label on the backend pod
+  policyTypes:
+    - Ingress           # ← Control incoming traffic only
+  ingress:
+    - from:
+        - podSelector:  # ← Only allow FROM this pod
+            matchLabels:
+              role: backend  # ← label on the backend pod
+      ports:                 # ports = the port that the PROTECTED pod is LISTENING on
+        - protocol: TCP
+          port: 27017          # ← PORT of mongodb (destination)
