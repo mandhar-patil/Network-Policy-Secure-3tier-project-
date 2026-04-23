@@ -7,9 +7,9 @@
 ## Table of Contents
 
 - [1. Network Policies](#1-network-policies)
-- [16. The Real Problem — Why Not Store Secrets in Git?](#16-the-real-problem--why-not-store-secrets-in-git)
-- [17. What is External Secrets Operator (ESO)?](#17-what-is-external-secrets-operator-eso)
-- [18. High-Level Flow — How ESO Works](#18-high-level-flow--how-eso-works)
+- [2. The Real Problem — Why Not Store Secrets in Git?](#16-the-real-problem--why-not-store-secrets-in-git)
+- [3. What is External Secrets Operator (ESO)?](#17-what-is-external-secrets-operator-eso)
+- [4. High-Level Flow — How ESO Works](#18-high-level-flow--how-eso-works)
 
 ---
 
@@ -35,7 +35,7 @@ By default, every Pod in a Kubernetes cluster can communicate freely with every 
 
 ---
 
-## 16. The Real Problem — Why Not Store Secrets in Git?
+## 2. The Real Problem — Why Not Store Secrets in Git?
 
 Kubernetes Secrets **look** secure but they are just **Base64 encoded — not encrypted**. If you push a Secret YAML to Git, anyone with repo access can instantly decode it with a single command.
 
@@ -47,7 +47,7 @@ Kubernetes Secrets **look** secure but they are just **Base64 encoded — not en
 
 ---
 
-## 17. What is External Secrets Operator (ESO)?
+## 3. What is External Secrets Operator (ESO)?
 
 ESO is a Kubernetes operator that acts as a **bridge** between Kubernetes and external secret stores like **HashiCorp Vault**, **AWS Secrets Manager**, or **Azure Key Vault**.
 
@@ -61,7 +61,7 @@ Instead of putting real secrets in your cluster YAML, you put only a **reference
 
 ---
 
-## 18. High-Level Flow — How ESO Works
+## 4. High-Level Flow — How ESO Works
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
